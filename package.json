@@ -6,6 +6,17 @@
   "scripts": {
     "test": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha"
   },
+  "keywoards":[
+    "git",
+    "add",
+    "commit",
+    "revert",
+    "show",
+    "modified",
+    "files",
+    "current",
+    "branch"
+  ],
   "author": "Joey Sham <sham.joey@gmail.com> (http://www.joeyism.com)",
   "license": "ISC",
   "devDependencies": {

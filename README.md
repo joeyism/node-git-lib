@@ -12,13 +12,13 @@ To use, require it by
     var git = require("git-lib");
 
 ## Methods
-* [`haveFilesToCommit`](#####haveFilesToCommit)
-* [`add`](#####add)
-* [`getCurrentBranch`](#####getCurrentBranch)
-* [`showFilesAdded`](#####showFilesAdded)
-* [`showFilesModified`](#####showFilesModified)
-* [`commit`](#####commit)
-* [`revert`](#####revert)
+* [`haveFilesToCommit`](#haveFilesToCommit)
+* [`add`](#add)
+* [`getCurrentBranch`](#getCurrentBranch)
+* [`showFilesAdded`](#showFilesAdded)
+* [`showFilesModified`](#showFilesModified)
+* [`commit`](#commit)
+* [`revert`](#revert)
 
 ##### haveFilesToCommit
 Resolves if current directory has files to commit, throws if it doesn't

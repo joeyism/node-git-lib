@@ -1,16 +1,16 @@
 {
   "name": "git-lib",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A github library for multiple package uses",
   "main": "git.js",
   "scripts": {
     "test": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha"
   },
-  "repository":{
-    "type":"git",
-    "url":"git+https://github.com/joeyism/node-git-lib"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joeyism/node-git-lib"
   },
-  "keywoards":[
+  "keywoards": [
     "git",
     "add",
     "commit",
@@ -22,10 +22,10 @@
     "branch"
   ],
   "author": "Joey Sham <sham.joey@gmail.com> (http://www.joeyism.com)",
-  "bugs":{
-    "url":"https://github.com/joeyism/node-git-lib/issues"
+  "bugs": {
+    "url": "https://github.com/joeyism/node-git-lib/issues"
   },
-  "homepage":"https://github.com/joeyism/node-git-lib#readme",
+  "homepage": "https://github.com/joeyism/node-git-lib#readme",
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.2.0",

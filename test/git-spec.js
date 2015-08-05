@@ -165,7 +165,7 @@ describe('git', function(){
         });
     });
 
-    describe('showFilesAdded', function(){
+    describe('showFilesModified', function(){
         
         beforeEach(function(done){
             mockery.enable({
@@ -186,7 +186,7 @@ describe('git', function(){
             var result ='file1\nfile2\n' ;
             mockery.registerMock('child_process', fakeChild(null, result));
             git = require('../git');
-            git.showFilesAdded().then(function(result){
+            git.showFilesModified().then(function(result){
                 expect(result).to.deep.equal(['file1','file2']);
                 done();
             });             
@@ -220,6 +220,16 @@ describe('git', function(){
             });
         });
         
+        it("should successfully revert file", function(done){
+            var files = "file1";
+            mockery.registerMock("child_process", fakeChild(null, null));
+            git = require("../git");
+            git.revert(files).then(function(result){
+                expect(result).to.be.undefined;
+                done();
+            });
+        });
+        
         it("should throw a catchable error", function(done){
             var files = ["file1", "file2"];
             mockery.registerMock("child_process", fakeChild("error", null));
@@ -228,6 +238,34 @@ describe('git', function(){
                 expect(result).to.equal("error");
                 done();
             });
+        });
+    });
+
+    describe('showFilesAdded', function(){
+        
+        beforeEach(function(done){
+            mockery.enable({
+                warnOnReplace: false,
+                warnOnUnregistered: false,
+                useCleanCache: true
+            });
+            done();
+        });
+
+        afterEach(function(done){
+            mockery.resetCache();
+            mockery.deregisterAll();
+            done();
+        });
+
+        it('should correctly display files added', function(done){
+            var result ='On branch master\nChanges to be committed:\n  (use "git reset HEAD <file>..." to unstage)\n\n\tmodified:   README.md\n\n' ;
+            mockery.registerMock('child_process', fakeChild(null, result));
+            git = require('../git');
+            git.showFilesAdded().then(function(result){
+                expect(result).to.equal('\tmodified:   README.md');
+                done();
+            });             
         });
     });
 });

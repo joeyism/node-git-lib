@@ -44,6 +44,26 @@ var getCurrentBranch = function(){
     });
 };
 
+var showFilesAdded = function(){
+    return new Promise(function(resolve, reject){
+        exec('git status', function(err, result){
+            if(err){
+                reject(err);
+            }
+            else {
+                var filesAdded = [];
+                result = result.split("\n");
+                result.forEach(function(line){
+                    if(line.indexOf('\t') > -1){
+                        filesAdded.push(line);
+                    }
+                });
+                resolve(filesAdded.join("\n"));
+            }
+        });
+    });
+}; 
+
 var haveFilesToCommit = function(){
     return new Promise(function(resolve, reject){ 
         exec('git status', function(err, result){
@@ -64,7 +84,7 @@ var haveFilesToCommit = function(){
     });
 };
 
-var showFilesAdded = function(){
+var showFilesModified = function(){
     return new Promise(function(resolve, reject){
         exec('git diff --name-only', function(err, result){
             if(err){
@@ -108,6 +128,7 @@ module.exports = {
     add: add,
     getCurrentBranch: getCurrentBranch,
     showFilesAdded: showFilesAdded,
+    showFilesModified: showFilesModified,
     commit: commit,
     revert: revert
 };

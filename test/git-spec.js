@@ -268,4 +268,55 @@ describe('git', function(){
             });             
         });
     });
+
+    describe("isGit", function(){
+        
+        beforeEach(function(done){
+            mockery.enable({
+                warnOnReplace: false,
+                warnOnUnregistered: false,
+                useCleanCache: true
+            });
+            done();
+        });
+
+        afterEach(function(done){
+            mockery.resetCache();
+            mockery.deregisterAll();
+            done();
+        });
+
+        it("should find that this is a git repository", function(done){
+            git = require("../git");
+            git.isGit().then(function(result){
+                expect(result).to.be.undefined;
+                done();
+            });
+        });
+    });
+    
+    describe("isGitSync", function(){
+        
+        beforeEach(function(done){
+            mockery.enable({
+                warnOnReplace: false,
+                warnOnUnregistered: false,
+                useCleanCache: true
+            });
+            done();
+        });
+
+        afterEach(function(done){
+            mockery.resetCache();
+            mockery.deregisterAll();
+            done();
+        });
+
+        it("should find that this is a git repository", function(done){
+            var cwd = process.cwd();
+            git = require("../git");
+            expect(git.isGitSync()).to.be.true;
+            done();
+        });
+    });
 });

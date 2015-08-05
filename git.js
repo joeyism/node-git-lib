@@ -2,6 +2,8 @@
 var Promise = require('promise');
 var exec = require('child_process').exec;
 var async = require('async');
+var fs = require("fs");
+var path = require("path");
 require('colors');
 
 var add = function(files){
@@ -123,6 +125,23 @@ var revert = function(files){
     });
 };
 
+var isGit = function(){
+    return new Promise(function(resolve, reject){
+        fs.exists(path.join(__dirname, ".git"), function(exists){
+            if (exists){
+                resolve();
+            }
+            else{
+                reject();
+            }
+        });
+    });
+};
+
+var isGitSync = function(){
+    return fs.existsSync(path.join(__dirname,".git"));
+};
+
 module.exports = {
     haveFilesToCommit: haveFilesToCommit,
     add: add,
@@ -130,5 +149,7 @@ module.exports = {
     showFilesAdded: showFilesAdded,
     showFilesModified: showFilesModified,
     commit: commit,
-    revert: revert
+    revert: revert,
+    isGit: isGit,
+    isGitSync: isGitSync
 };

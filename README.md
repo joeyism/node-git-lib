@@ -19,6 +19,8 @@ To use, require it by
 * [`showFilesModified`](#showFilesModified)
 * [`commit`](#commit)
 * [`revert`](#revert)
+* [`isGit`](#isGit)
+* [`isGitSync`](#isGitSync)
 
 ##### haveFilesToCommit
 Resolves if current directory has files to commit, throws if it doesn't
@@ -87,8 +89,30 @@ Takes an array of files, or a string of only one file, and reverts them
     }).catch(function(err){
         /** throws an error **/
     });
+
+##### isGit
+Determines if current directory has git initialized
+
+    git.isGit().then(function(){
+        /** has git initialized **/
+    }).catch(function(){
+        /** doesn't have git initialized **/
+    });
+
+##### isGitSync
+A synchronous version of [`isGit`](#isGit), so it can be used in an *if* statement
+
+    if (git.isGitSync()){
+        /** has git initialized **/
+    }
+    else {
+        /** doesn't have git initialized **/
+    }
     
 ## Versions
+**1.2.0**
+* Updated with isGit and isGitSync
+
 **1.1.0**
 * Added README
 * Added showFilesAdded

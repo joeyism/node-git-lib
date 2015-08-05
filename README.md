@@ -12,15 +12,15 @@ To use, require it by
     var git = require("git-lib");
 
 ## Methods
-* [`haveFilesToCommit`](#haveFilesToCommit)
+* [`haveFilesToCommit`](#havefilestocommit)
 * [`add`](#add)
-* [`getCurrentBranch`](#getCurrentBranch)
-* [`showFilesAdded`](#showFilesAdded)
-* [`showFilesModified`](#showFilesModified)
+* [`getCurrentBranch`](#getcurrentbranch)
+* [`showFilesAdded`](#showfilesadded)
+* [`showFilesModified`](#showfilesmodified)
 * [`commit`](#commit)
 * [`revert`](#revert)
-* [`isGit`](#isGit)
-* [`isGitSync`](#isGitSync)
+* [`isGit`](#isgit)
+* [`isGitSync`](#isgitsync)
 
 ##### haveFilesToCommit
 Resolves if current directory has files to commit, throws if it doesn't
@@ -100,7 +100,7 @@ Determines if current directory has git initialized
     });
 
 ##### isGitSync
-A synchronous version of [`isGit`](#isGit), so it can be used in an *if* statement
+A synchronous version of [`isGit`](#isgit), so it can be used in an *if* statement
 
     if (git.isGitSync()){
         /** has git initialized **/

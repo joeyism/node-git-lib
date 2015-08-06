@@ -289,7 +289,7 @@ describe('git', function(){
         it("should find that this is a git repository", function(done){
             git = require("../git");
             git.isGit().then(function(result){
-                expect(result).to.be.undefined;
+                expect(result).to.not.be.undefined;
                 done();
             });
         });
@@ -313,7 +313,6 @@ describe('git', function(){
         });
 
         it("should find that this is a git repository", function(done){
-            var cwd = process.cwd();
             git = require("../git");
             expect(git.isGitSync()).to.be.true;
             done();

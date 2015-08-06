@@ -127,19 +127,19 @@ var revert = function(files){
 
 var isGit = function(){
     return new Promise(function(resolve, reject){
-        fs.exists(path.join(__dirname, ".git"), function(exists){
-            if (exists){
-                resolve();
+        fs.lstat(path.join(__dirname, ".git"), function(err, exists){
+            if (err){
+                reject('This is not a git repository. Please make sure this is a git repository before you continue');
             }
             else{
-                reject('This is not a git repository. Please make sure this is a git repository before you continue');
+                resolve(exists);
             }
         });
     });
 };
 
 var isGitSync = function(){
-    return fs.existsSync(path.join(__dirname,".git"));
+    return fs.lstatSync(path.join(__dirname,".git"))? true: false;
 };
 
 module.exports = {

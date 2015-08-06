@@ -110,6 +110,9 @@ A synchronous version of [`isGit`](#isgit), so it can be used in an *if* stateme
     }
     
 ## Versions
+**1.2.3**
+* fixed both isGit
+
 **1.2.2**
 * Added error output with isGit
 

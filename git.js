@@ -127,7 +127,7 @@ var revert = function(files){
 
 var isGit = function(){
     return new Promise(function(resolve, reject){
-        fs.lstat(path.join(__dirname, ".git"), function(err, exists){
+        fs.lstat(path.join(process.cwd(), ".git"), function(err, exists){
             if (err){
                 reject('This is not a git repository. Please make sure this is a git repository before you continue');
             }
@@ -139,7 +139,7 @@ var isGit = function(){
 };
 
 var isGitSync = function(){
-    return fs.lstatSync(path.join(__dirname,".git"))? true: false;
+    return fs.lstatSync(path.join(process.cwd(),".git"))? true: false;
 };
 
 module.exports = {

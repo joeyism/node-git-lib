@@ -132,7 +132,7 @@ var isGit = function(){
                 resolve();
             }
             else{
-                reject();
+                reject('This is not a git repository. Please make sure this is a git repository before you continue');
             }
         });
     });

@@ -95,8 +95,8 @@ Determines if current directory has git initialized
 
     git.isGit().then(function(){
         /** has git initialized **/
-    }).catch(function(){
-        /** doesn't have git initialized **/
+    }).catch(function(err){
+        /** doesn't have git initialized, and err displays that **/
     });
 
 ##### isGitSync
@@ -110,6 +110,9 @@ A synchronous version of [`isGit`](#isgit), so it can be used in an *if* stateme
     }
     
 ## Versions
+**1.2.2**
+* Added error output with isGit
+
 **1.2.1**
 * Fixed README bugs
 

@@ -154,7 +154,7 @@ describe('git', function(){
                 done();
             });       
         });
-        
+
         it('should throw an error when getting current branch throws an error', function(done){
             mockery.registerMock('child_process', fakeChild('error','whatever'));
             git = require('../git');
@@ -166,7 +166,7 @@ describe('git', function(){
     });
 
     describe('showFilesModified', function(){
-        
+
         beforeEach(function(done){
             mockery.enable({
                 warnOnReplace: false,
@@ -191,7 +191,7 @@ describe('git', function(){
                 done();
             });             
         });
-        
+
         it('should catch an error', function(done){
             mockery.registerMock('child_process', fakeChild('error', 'doesnt matter'));
             git = require('../git');
@@ -203,7 +203,7 @@ describe('git', function(){
     });
 
     describe("revert", function(){
-        
+
         beforeEach(function(done){
             mockery.enable({
                 warnOnReplace: false,
@@ -218,7 +218,7 @@ describe('git', function(){
             mockery.deregisterAll();
             done();
         });
-        
+
         it("should successfully revert files", function(done){
             var files = ["file1", "file2"];
             mockery.registerMock("child_process", fakeChild(null, null));
@@ -228,7 +228,7 @@ describe('git', function(){
                 done();
             });
         });
-        
+
         it("should successfully revert file", function(done){
             var files = "file1";
             mockery.registerMock("child_process", fakeChild(null, null));
@@ -238,7 +238,7 @@ describe('git', function(){
                 done();
             });
         });
-        
+
         it("should throw a catchable error", function(done){
             var files = ["file1", "file2"];
             mockery.registerMock("child_process", fakeChild("error", null));
@@ -251,7 +251,7 @@ describe('git', function(){
     });
 
     describe('showFilesAdded', function(){
-        
+
         beforeEach(function(done){
             mockery.enable({
                 warnOnReplace: false,
@@ -276,7 +276,7 @@ describe('git', function(){
                 done();
             });             
         });
-        
+
         it('should throw an error successfully', function(done){
             mockery.registerMock('child_process', fakeChild('error', 'doesnt matter'));
             git = require('../git');
@@ -288,7 +288,7 @@ describe('git', function(){
     });
 
     describe("isGit", function(){
-        
+
         beforeEach(function(done){
             mockery.enable({
                 warnOnReplace: false,
@@ -312,9 +312,9 @@ describe('git', function(){
             });
         });
     });
-    
+
     describe("isGitSync", function(){
-        
+
         beforeEach(function(done){
             mockery.enable({
                 warnOnReplace: false,
@@ -337,8 +337,8 @@ describe('git', function(){
         });
     });
 
-    describe("showFilesCached", function(){
-        
+    describe("getFilesCached", function(){
+
         beforeEach(function(done){
             mockery.enable({
                 warnOnReplace: false,
@@ -358,16 +358,16 @@ describe('git', function(){
             var result ='file1\nfile2\n' ;
             mockery.registerMock('child_process', fakeChild(null, result));
             git = require('../git');
-            git.showFilesModified().then(function(result){
+            git.getFilesCached().then(function(result){
                 expect(result).to.deep.equal(['file1','file2']);
                 done();
             });             
         });
-        
+
         it('should throw an error', function(done){
             mockery.registerMock('child_process', fakeChild('error', 'doesnt matter'));
             git = require('../git');
-            git.showFilesModified().catch(function(result){
+            git.getFilesCached().catch(function(result){
                 expect(result).to.equal('error');
                 done();
             });             

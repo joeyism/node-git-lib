@@ -66,7 +66,7 @@ var showFilesAdded = function(){
     });
 }; 
 
-var showFilesCached = function(){
+var getFilesCached = function(){
     return new Promise(function(resolve, reject){
         exec('git diff --name-only --cached', function(err, result){
             if (err){
@@ -166,5 +166,6 @@ module.exports = {
     commit: commit,
     revert: revert,
     isGit: isGit,
-    isGitSync: isGitSync
+    isGitSync: isGitSync,
+    getFilesCached: getFilesCached
 };

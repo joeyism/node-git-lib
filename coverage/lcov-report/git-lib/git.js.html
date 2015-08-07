@@ -15,10 +15,10 @@
 <div class="header high">
     <h1>Code coverage report for <span class="entity">git-lib/git.js</span></h1>
     <h2>
-        Statements: <span class="metric">90.36% <small>(75 / 83)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Branches: <span class="metric">86.67% <small>(26 / 30)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Functions: <span class="metric">90.32% <small>(28 / 31)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Lines: <span class="metric">90.36% <small>(75 / 83)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">98.8% <small>(82 / 83)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">93.33% <small>(28 / 30)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(31 / 31)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">98.8% <small>(82 / 83)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">git-lib/</a> &#187; git.js</div>
@@ -195,7 +195,8 @@
 168
 169
 170
-171</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+171
+172</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">20</span>
 <span class="cline-any cline-yes">20</span>
 <span class="cline-any cline-yes">20</span>
@@ -264,15 +265,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">20</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -299,16 +300,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">20</span>
-<span class="cline-any cline-yes">4</span>
-<span class="cline-any cline-yes">4</span>
-<span class="cline-any cline-yes">4</span>
 <span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -355,6 +356,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -433,16 +435,16 @@ var showFilesAdded = function(){
     });
 }; 
 &nbsp;
-var showFilesCached = <span class="fstat-no" title="function not covered" >function(){</span>
-<span class="cstat-no" title="statement not covered" >    return new Promise(<span class="fstat-no" title="function not covered" >function(resolve, reject){</span></span>
-<span class="cstat-no" title="statement not covered" >        exec('git diff --name-only --cached', <span class="fstat-no" title="function not covered" >function(err, result){</span></span>
-<span class="cstat-no" title="statement not covered" >            if (err){</span>
-<span class="cstat-no" title="statement not covered" >                reject(err);</span>
+var getFilesCached = function(){
+    return new Promise(function(resolve, reject){
+        exec('git diff --name-only --cached', function(err, result){
+            if (err){
+                reject(err);
             }
             else {
-<span class="cstat-no" title="statement not covered" >                var files = result.split("\n");</span>
-<span class="cstat-no" title="statement not covered" >                files.pop();</span>
-<span class="cstat-no" title="statement not covered" >                resolve(files);</span>
+                var files = result.split("\n");
+                files.pop();
+                resolve(files);
             }
         });
     });
@@ -533,14 +535,15 @@ module.exports = {
     commit: commit,
     revert: revert,
     isGit: isGit,
-    isGitSync: isGitSync
+    isGitSync: isGitSync,
+    getFilesCached: getFilesCached
 };
 &nbsp;</pre></td></tr>
 </table></pre>
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Aug 06 2015 22:14:25 GMT-0400 (EDT)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Aug 06 2015 22:23:32 GMT-0400 (EDT)</div>
 </div>
 <script src="../prettify.js"></script>
 <script>

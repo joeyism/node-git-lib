@@ -191,6 +191,15 @@ describe('git', function(){
                 done();
             });             
         });
+        
+        it('should catch an error', function(done){
+            mockery.registerMock('child_process', fakeChild('error', 'doesnt matter'));
+            git = require('../git');
+            git.showFilesModified().catch(function(result){
+                expect(result).to.equal('error');
+                done();
+            });             
+        });
     });
 
     describe("revert", function(){
@@ -267,6 +276,15 @@ describe('git', function(){
                 done();
             });             
         });
+        
+        it('should throw an error successfully', function(done){
+            mockery.registerMock('child_process', fakeChild('error', 'doesnt matter'));
+            git = require('../git');
+            git.showFilesAdded().catch(function(result){
+                expect(result).to.equal('error');
+                done();
+            });             
+        });
     });
 
     describe("isGit", function(){
@@ -316,6 +334,43 @@ describe('git', function(){
             git = require("../git");
             expect(git.isGitSync()).to.be.true;
             done();
+        });
+    });
+
+    describe("showFilesCached", function(){
+        
+        beforeEach(function(done){
+            mockery.enable({
+                warnOnReplace: false,
+                warnOnUnregistered: false,
+                useCleanCache: true
+            });
+            done();
+        });
+
+        afterEach(function(done){
+            mockery.resetCache();
+            mockery.deregisterAll();
+            done();
+        });
+
+        it('should correctly display files cached', function(done){
+            var result ='file1\nfile2\n' ;
+            mockery.registerMock('child_process', fakeChild(null, result));
+            git = require('../git');
+            git.showFilesModified().then(function(result){
+                expect(result).to.deep.equal(['file1','file2']);
+                done();
+            });             
+        });
+        
+        it('should throw an error', function(done){
+            mockery.registerMock('child_process', fakeChild('error', 'doesnt matter'));
+            git = require('../git');
+            git.showFilesModified().catch(function(result){
+                expect(result).to.equal('error');
+                done();
+            });             
         });
     });
 });

@@ -66,6 +66,21 @@ var showFilesAdded = function(){
     });
 }; 
 
+var showFilesCached = function(){
+    return new Promise(function(resolve, reject){
+        exec('git diff --name-only --cached', function(err, result){
+            if (err){
+                reject(err);
+            }
+            else {
+                var files = result.split("\n");
+                files.pop();
+                resolve(files);
+            }
+        });
+    });
+};
+
 var haveFilesToCommit = function(){
     return new Promise(function(resolve, reject){ 
         exec('git status', function(err, result){

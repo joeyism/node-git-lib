@@ -21,6 +21,7 @@ To use, require it by
 * [`revert`](#revert)
 * [`isGit`](#isgit)
 * [`isGitSync`](#isgitsync)
+* [`showFilesCached`](#showfilescached)
 
 ##### haveFilesToCommit
 Resolves if current directory has files to commit, throws if it doesn't
@@ -108,8 +109,20 @@ A synchronous version of [`isGit`](#isgit), so it can be used in an *if* stateme
     else {
         /** doesn't have git initialized **/
     }
+
+##### showFilesCached
+Show files that are cached, which are also files that are added
+
+    git.showFilesCached().then(function(files){
+        /** files is an array list of files that has been added **/
+    }).catch(function(err){
+        /** throws an error **/
+    });
     
 ## Versions
+**1.3.0**
+* Added showFilesCached
+
 **1.2.3**
 * fixed both isGit
 

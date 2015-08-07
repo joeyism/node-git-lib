@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/joeyism/node-git-lib"
   },
-  "keywoards": [
+  "keywords": [
     "git",
     "add",
     "commit",

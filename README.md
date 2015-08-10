@@ -125,6 +125,7 @@ Show files that are cached, which are also files that are added
 
 ##### getBranches
 **Local**
+
 Returns all local branches for the current git repository
 
     git.getBranches.local().then(function(branches){
@@ -134,6 +135,7 @@ Returns all local branches for the current git repository
     });
 
 **all**
+
 Returns all branches, including remote, for the current git repository
 
     git.getBranches.all().then(function(branches){

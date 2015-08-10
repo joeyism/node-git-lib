@@ -27,7 +27,7 @@ To use, require it by
 * [`checkout`](#checkout)
 
 
-##### haveFilesToCommit
+### haveFilesToCommit
 Resolves if current directory has files to commit, throws if it doesn't
     
     git.haveFilesToCommit().then(function(){
@@ -41,7 +41,7 @@ Resolves if current directory has files to commit, throws if it doesn't
         }
     });
 
-##### add
+### add
 Attempts to *git add* a file
 
     git.add("example.file").then(function(){
@@ -50,7 +50,7 @@ Attempts to *git add* a file
         /** unsuccessful **/
     });
     
-##### getCurrentBranch
+### getCurrentBranch
 Gets the name of the directory's current branch
 
     git.getCurrentBranch().then(function(branchname){
@@ -59,7 +59,7 @@ Gets the name of the directory's current branch
         /** throws an error **/
     });
     
-##### showFilesAdded
+### showFilesAdded
 Show files that has already been added
 
     git.showFilesAdded().then(function(filesAdded){
@@ -68,7 +68,7 @@ Show files that has already been added
         /** throws an error**/
     });
     
-##### showFilesModified
+### showFilesModified
 Show files in current directory that has been modified (and probably needs to be commited)
 
     git.showFilesModified().then(function(modifiedFiles){
@@ -77,7 +77,7 @@ Show files in current directory that has been modified (and probably needs to be
         /** throws an error **/
     });
     
-##### commit
+### commit
 Commits with a string of message and a string of options
 
     git.commmit("message to commit", "--force").then(function(){
@@ -86,7 +86,7 @@ Commits with a string of message and a string of options
         /** throws an error **/
     });
     
-##### revert
+### revert
 Takes an array of files, or a string of only one file, and reverts them
 
     git.revert(["file1","file2"]).then(function(){
@@ -95,7 +95,7 @@ Takes an array of files, or a string of only one file, and reverts them
         /** throws an error **/
     });
 
-##### isGit
+### isGit
 Determines if current directory has git initialized
 
     git.isGit().then(function(){
@@ -104,7 +104,7 @@ Determines if current directory has git initialized
         /** doesn't have git initialized, and err displays that **/
     });
 
-##### isGitSync
+### isGitSync
 A synchronous version of [`isGit`](#isgit), so it can be used in an *if* statement
 
     if (git.isGitSync()){
@@ -114,7 +114,7 @@ A synchronous version of [`isGit`](#isgit), so it can be used in an *if* stateme
         /** doesn't have git initialized **/
     }
 
-##### getFilesCached
+### getFilesCached
 Show files that are cached, which are also files that are added
 
     git.getFilesCached().then(function(files){
@@ -123,7 +123,7 @@ Show files that are cached, which are also files that are added
         /** throws an error **/
     });
 
-##### getBranches
+### getBranches
 **Local**
 
 Returns all local branches for the current git repository
@@ -144,7 +144,7 @@ Returns all branches, including remote, for the current git repository
         /** throws an error **/
     });
 
-##### checkout
+### checkout
 Changes into branch *thisBranch*, where *thisBranch* is passed into the function
 
     git.checkout("thisBranch").then(function(){
@@ -153,7 +153,7 @@ Changes into branch *thisBranch*, where *thisBranch* is passed into the function
         /** throws an error **/
     });
 
-##### newBranch
+### newBranch
 Creates new branch *newBranch*, where *newBranch* is passed into the function
 
     git.newBranch("newBranch").then(function(){

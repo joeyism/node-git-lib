@@ -163,6 +163,9 @@ Creates new branch *newBranch*, where *newBranch* is passed into the function
     });
 
 ## Versions
+**1.4.0**
+* Updated to include methods for checkout-cli
+
 **1.3.1**
 * changed showFilesCached to getFilesCached
 

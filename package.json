@@ -1,6 +1,6 @@
 {
   "name": "git-lib",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "description": "A github library for multiple package uses",
   "main": "git.js",
   "scripts": {

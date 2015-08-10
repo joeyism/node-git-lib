@@ -22,6 +22,10 @@ To use, require it by
 * [`isGit`](#isgit)
 * [`isGitSync`](#isgitsync)
 * [`getFilesCached`](#showfilescached)
+* [`getBranches`](#getbranches)
+* [`newBranch`](#newbranch)
+* [`checkout`](#checkout)
+
 
 ##### haveFilesToCommit
 Resolves if current directory has files to commit, throws if it doesn't

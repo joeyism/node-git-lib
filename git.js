@@ -4,6 +4,7 @@ var exec = require('child_process').exec;
 var async = require('async');
 var fs = require("fs");
 var path = require("path");
+var _ = require("lodash");
 require('colors');
 
 var add = function(files){
@@ -157,6 +158,92 @@ var isGitSync = function(){
     return fs.lstatSync(path.join(process.cwd(),".git"))? true: false;
 };
 
+var parseBranches = {
+    all: function(result){
+        var branches = [];
+        result = result.split('\n');
+        result.pop();
+        result.forEach(function(branch){
+            branch = branch.substring(2);
+            if(branch.indexOf('remotes') > -1){
+                branch = branch.replace('remotes/','');
+                branch = branch.substring(branch.indexOf('/')+1);
+                branches.push(branch);
+            }
+            else {
+                branches.push(branch);
+            } 
+        });
+        return branches;
+    },
+    local: function(result){
+        var branches = [];
+        result.split('\n').forEach(function(branch){
+            if(branch.indexOf('refs/heads') > -1){
+                branches.push(branch.replace('refs/heads','').substring(branch.indexOf('refs/heads')+1));
+            }
+        });
+        return branches;
+    } 
+};
+
+var getBranches = {
+    local: function(){ 
+        return new Promise(function(resolve, reject){
+            exec('git show-ref', function(err, result){
+                if(err){
+                    reject(err);
+                }
+                else {
+                    var branches = parseBranches.local(result);
+                    resolve(branches);
+                }
+            });
+        });
+    },
+    all: function(){
+        return new Promise(function(resolve, reject){
+            exec('git branch -a', function(err, result){
+                if(err){
+                    reject(err);
+                }
+                else {
+                    var branches = parseBranches.all(result);
+                    branches = _.uniq(branches);
+                    resolve(branches);
+                }
+            });
+        });
+    }
+}
+
+var checkout = function(branch){
+    return new Promise(function(resolve, reject){
+        exec('git checkout ' + branch, function(err, result){
+            if(err){
+                reject(err);
+            }
+            else {
+                resolve(branch);
+            }
+        });
+    });
+};
+
+var newBranch = function(newBranchName){
+    return new Promise(function(resolve, reject){
+        exec('git checkout -b ' + newBranchName, function(err){
+            if(err){
+                reject(err);
+            }
+            else {
+                resolve(newBranchName);
+            }
+        }); 
+    });
+
+}; 
+
 module.exports = {
     haveFilesToCommit: haveFilesToCommit,
     add: add,
@@ -167,5 +254,8 @@ module.exports = {
     revert: revert,
     isGit: isGit,
     isGitSync: isGitSync,
+    getBranches: getBranches,
+    newBranch: newBranch,
+    checkout: checkout,
     getFilesCached: getFilesCached
 };

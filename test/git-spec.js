@@ -373,4 +373,156 @@ describe('git', function(){
             });             
         });
     });
+    
+    describe('getBranches', function(){
+
+        describe('local', function(){
+
+            beforeEach(function(done){
+                mockery.enable({
+                    warnOnReplace: false,
+                    warnOnUnregistered: false,
+                    useCleanCache: true
+                });
+                done();
+            });
+
+            afterEach(function(done){
+                mockery.resetCache();
+                mockery.deregisterAll();
+                done();
+            });
+
+            it('should successfully return local branch information', function(done){
+                mockery.registerMock('child_process',fakeChild(null ,'123 refs/heads/branch1\n 123 refs/heads/feature/branch2\n'));
+                git = require('../git');
+                git.getBranches.local().then(function(branches){
+                    expect(branches).to.deep.equal(['branch1','feature/branch2']);
+                    done();
+                });
+            });
+
+            it('should successfully throw an error when there is no branch information', function(done){
+                mockery.registerMock('child_process', fakeChild('no branches', 'doesnt mamtter'));
+                git = require('../git');
+                git.getBranches.local().then(function(result){
+                    expect(result).to.be.undefined;
+                }).catch(function(error){
+                    expect(error).to.equal('no branches');
+                    done();
+                });
+            });
+        });
+
+        describe('all', function(){
+
+            beforeEach(function(done){
+                mockery.enable({
+                    warnOnReplace: false,
+                    warnOnUnregistered: false,
+                    useCleanCache: true
+                });
+                done();
+            });
+
+            afterEach(function(done){
+                mockery.resetCache();
+                mockery.deregisterAll();
+                done();
+            });
+
+            it('should successfully return all branch information', function(done){
+                mockery.registerMock('child_process',fakeChild(null ,'* master\n  develop\n  remotes/origin/master\n  remotes/origin/develop\n  remotes/origin/feature/branch1\n'));
+                git = require('../git');
+                git.getBranches.all().then(function(branches){
+                    expect(branches).to.deep.equal(['master','develop','feature/branch1']);
+                    done();
+                });
+            });
+
+            it('should successfully throw an error when there is no branch information', function(done){
+                mockery.registerMock('child_process', fakeChild('no branches', 'doesnt mamtter'));
+                git = require('../git');
+                git.getBranches.all().then(function(result){
+                    expect(result).to.be.undefined;
+                }).catch(function(error){
+                    expect(error).to.equal('no branches');
+                    done();
+                });
+            });
+        });
+
+    });
+    describe('checkout', function(){
+
+        beforeEach(function(done){
+            mockery.enable({
+                warnOnReplace: false,
+                warnOnUnregistered: false,
+                useCleanCache: true
+            });
+            done();
+        });
+
+        afterEach(function(done){
+            mockery.resetCache();
+            mockery.deregisterAll();
+            done();
+        });
+
+        it('should return the branch name if checkout is successful', function(done){
+            mockery.registerMock('child_process', fakeChild(null,'success'));
+            git = require('../git');
+            git.checkout('branch name').then(function(result){
+                expect(result).to.equal('branch name');
+                done();
+            });
+        });
+
+        it('should return an error if checkout throws an error', function(done){
+            mockery.registerMock('child_process', fakeChild('error','doesnt matter'));
+            git = require('../git');
+            git.checkout().catch(function(error){
+                expect(error).to.equal('error');
+                done();
+            });
+        });
+
+    });
+
+    describe('newBranch', function(){
+
+        beforeEach(function(done){
+            mockery.enable({
+                warnOnReplace: false,
+                warnOnUnregistered: false,
+                useCleanCache: true
+            });
+            done();
+        });
+
+        afterEach(function(done){
+            mockery.resetCache();
+            mockery.deregisterAll();
+            done();
+        });
+
+        it('should successfully return the current branch the user is on', function(done){
+            mockery.registerMock('child_process', fakeChild(null, 'switched to new branch\n'));
+            git = require('../git');
+            git.newBranch('branchname').then(function(result){
+                expect(result).to.equal('branchname');
+                done();
+            });       
+        });
+
+        it('should throw an error when getting current branch throws an error', function(done){
+            mockery.registerMock('child_process', fakeChild('error','whatever'));
+            git = require('../git');
+            git.newBranch().catch(function(error){
+                expect(error).to.equal('error');
+                done();
+            });       
+        });
+    });
 });

@@ -118,7 +118,44 @@ Show files that are cached, which are also files that are added
     }).catch(function(err){
         /** throws an error **/
     });
-    
+
+##### getBranches
+**Local**
+Returns all local branches for the current git repository
+
+    git.getBranches.local().then(function(branches){
+        /** branches is an array of local branches **/  
+    }).catch(function(error){
+        /** throws an error **/
+    });
+
+**all**
+Returns all branches, including remote, for the current git repository
+
+    git.getBranches.all().then(function(branches){
+        /** branches is an array of all branches **/  
+    }).catch(function(error){
+        /** throws an error **/
+    });
+
+##### checkout
+Changes into branch *thisBranch*, where *thisBranch* is passed into the function
+
+    git.checkout("thisBranch").then(function(){
+        /** successfully checked out into branch *thisBranch* **/
+    }).catch(function(err){
+        /** throws an error **/
+    });
+
+##### newBranch
+Creates new branch *newBranch*, where *newBranch* is passed into the function
+
+    git.newBranch("newBranch").then(function(){
+        /** new branch *newBranch* was successfully created **/
+    }).catch(function(err){
+        /** throws an error **/
+    });
+
 ## Versions
 **1.3.1**
 * changed showFilesCached to getFilesCached

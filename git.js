@@ -257,6 +257,26 @@ var deleteBranch = function(branch){
     });
 };
 
+var deleteBranches = function(branches){
+    var obj = {
+        success: [],
+        failure: []
+    };
+    return new Promise(function(resolve){
+        async.each(branches, function(branch, next){
+            deleteBranch(branch).then(function(){
+                obj.success.push(branch);
+                next();
+            }).catch(function(err){
+                obj.failure.push(branch);
+                next();
+            });
+        }, function(){
+            resolve(obj);
+        });
+    });
+};
+
 module.exports = {
     haveFilesToCommit: haveFilesToCommit,
     add: add,
@@ -271,5 +291,6 @@ module.exports = {
     newBranch: newBranch,
     checkout: checkout,
     getFilesCached: getFilesCached,
-    deleteBranch: deleteBranch
+    deleteBranch: deleteBranch,
+    deleteBranches: deleteBranches
 };

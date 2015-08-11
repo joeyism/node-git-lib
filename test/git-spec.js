@@ -561,4 +561,31 @@ describe('git', function(){
             });       
         });
     });
+    
+    describe('deleteBranches', function(){
+
+        beforeEach(function(done){
+            mockery.enable({
+                warnOnReplace: false,
+                warnOnUnregistered: false,
+                useCleanCache: true
+            });
+            done();
+        });
+
+        afterEach(function(done){
+            mockery.resetCache();
+            mockery.deregisterAll();
+            done();
+        });
+
+        it('should successfully delete a branch and returns', function(done){
+            mockery.registerMock('child_process', fakeChild(null, ''));
+            git = require('../git');
+            git.deleteBranches(["branch1","branch2"]).then(function(result){
+                expect(result).to.deep.equal({success: ["branch1","branch2"], failure: [] });
+                done();
+            });       
+        });
+    });
 });

@@ -26,6 +26,7 @@ To use, require it by
 * [`newBranch`](#newbranch)
 * [`checkout`](#checkout) both remote and local
 * [`deleteBranch`](#deletebranch)
+* [`deleteBranches`](#deletebranches)
 
 
 ### haveFilesToCommit
@@ -172,8 +173,17 @@ Deletes branch *thisbranch*, where *thisbranch* is passed into the function
         /** throws an error **/
     });
 
+### deleteBranches
+Delete multiple branches, using [`deleteBranch`](#deletebranch). The array passed into the function is the array of a list of branches to delete
+
+    git.deleteBranches(/** array of branches name **/).then(function(result){
+        /** result = { success: [ all the successfully deleted branches ], failure: [ all the branches that failed to be deleted ] } **/
+    });
 
 ## Versions
+**1.6.0**
+* Added deleteBranches
+
 **1.5.0**
 * Added deleteBranch
 

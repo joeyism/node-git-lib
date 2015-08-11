@@ -19,6 +19,10 @@
     "modified",
     "files",
     "current",
+    "delete",
+    "checkout",
+    "local",
+    "remote",
     "branch"
   ],
   "author": "Joey Sham <sham.joey@gmail.com> (http://www.joeyism.com)",
@@ -39,6 +43,7 @@
     "async": "^1.4.0",
     "colors": "^1.1.2",
     "lodash": "^3.10.1",
-    "promise": "^7.0.4"
+    "promise": "^7.0.4",
+    "xcept": "^1.0.0"
   }
 }

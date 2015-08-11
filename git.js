@@ -6,6 +6,7 @@ var fs = require("fs");
 var path = require("path");
 var _ = require("lodash");
 require('colors');
+require("xcept");
 
 var add = function(files){
     return new Promise(function(resolve, reject){
@@ -241,8 +242,20 @@ var newBranch = function(newBranchName){
             }
         }); 
     });
-
 }; 
+
+var deleteBranch = function(branch){
+    return new Promise(function(resolve, reject){
+        exec("git branch -d " + branch, function(err){
+            if (err){
+                reject(err);
+            }
+            else {
+                resolve();
+            }
+        });
+    });
+};
 
 module.exports = {
     haveFilesToCommit: haveFilesToCommit,
@@ -257,5 +270,6 @@ module.exports = {
     getBranches: getBranches,
     newBranch: newBranch,
     checkout: checkout,
-    getFilesCached: getFilesCached
+    getFilesCached: getFilesCached,
+    deleteBranch: deleteBranch
 };

@@ -373,7 +373,7 @@ describe('git', function(){
             });             
         });
     });
-    
+
     describe('getBranches', function(){
 
         describe('local', function(){
@@ -520,6 +520,42 @@ describe('git', function(){
             mockery.registerMock('child_process', fakeChild('error','whatever'));
             git = require('../git');
             git.newBranch().catch(function(error){
+                expect(error).to.equal('error');
+                done();
+            });       
+        });
+    });
+
+    describe('deleteBranch', function(){
+
+        beforeEach(function(done){
+            mockery.enable({
+                warnOnReplace: false,
+                warnOnUnregistered: false,
+                useCleanCache: true
+            });
+            done();
+        });
+
+        afterEach(function(done){
+            mockery.resetCache();
+            mockery.deregisterAll();
+            done();
+        });
+
+        it('should successfully delete a branch and returns', function(done){
+            mockery.registerMock('child_process', fakeChild(null, ''));
+            git = require('../git');
+            git.deleteBranch().then(function(result){
+                expect(result).to.be.undefined;
+                done();
+            });       
+        });
+
+        it('should throw an error if deletion was unsuccessful', function(done){
+            mockery.registerMock('child_process', fakeChild('error', 'doesnt matter'));
+            git = require('../git');
+            git.deleteBranch().catch(function(error){
                 expect(error).to.equal('error');
                 done();
             });       

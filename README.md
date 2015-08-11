@@ -22,9 +22,10 @@ To use, require it by
 * [`isGit`](#isgit)
 * [`isGitSync`](#isgitsync)
 * [`getFilesCached`](#showfilescached)
-* [`getBranches`](#getbranches)
+* [`getBranches`](#getbranches) both remote and local
 * [`newBranch`](#newbranch)
-* [`checkout`](#checkout)
+* [`checkout`](#checkout) both remote and local
+* [`deleteBranch`](#deletebranch)
 
 
 ### haveFilesToCommit
@@ -162,7 +163,20 @@ Creates new branch *newBranch*, where *newBranch* is passed into the function
         /** throws an error **/
     });
 
+### deleteBranch
+Deletes branch *thisbranch*, where *thisbranch* is passed into the function
+
+    git.deleteBranch("thisbranch").then(function(){
+        /** new branch *thisbranch* was successfully deleted**/
+    }).catch(function(err){
+        /** throws an error **/
+    });
+
+
 ## Versions
+**1.5.0**
+* Added deleteBranch
+
 **1.4.0**
 * Updated to include methods for checkout-cli
 

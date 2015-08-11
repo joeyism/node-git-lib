@@ -1,4 +1,7 @@
 # git-lib
+
+[![Build Status](https://travis-ci.org/joeyism/node-git-lib.svg?branch=master)](https://travis-ci.org/joeyism/node-git-lib)
+
 A library that contains different methods to be consumed by a node module
 
 ## Install

@@ -292,5 +292,6 @@ module.exports = {
     checkout: checkout,
     getFilesCached: getFilesCached,
     deleteBranch: deleteBranch,
-    deleteBranches: deleteBranches
+    deleteBranches: deleteBranches,
+    uncommit: require("./lib/uncommit.js")
 };

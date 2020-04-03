@@ -10,7 +10,7 @@ require("xcept");
 
 var add = function(files){
     return new Promise(function(resolve, reject){
-        execFile('git', ['add', files], function(err){
+        execFile('git', ['add', ...files.split(' ')], function(err){
             if (err){
                 reject(err);
             }

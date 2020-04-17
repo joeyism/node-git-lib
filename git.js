@@ -1,6 +1,6 @@
 'use strict';
 var Promise = require('promise');
-var exec = require('child_process').exec;
+var execFile = require('child_process').execFile;
 var async = require('async');
 var fs = require("fs");
 var path = require("path");
@@ -10,7 +10,7 @@ require("xcept");
 
 var add = function(files){
     return new Promise(function(resolve, reject){
-        exec('git add ' + files, function(err){
+        execFile('git', ['add', ...files.split(' ')], function(err){
             if (err){
                 reject(err);
             }
@@ -24,7 +24,7 @@ var add = function(files){
 var commit = function(message, options){
     options = options || "";
     return new Promise(function(resolve, reject){
-        exec('git commit ' + options + ' -m \"' + message + '\"', function(err){
+        execFile('git', ['commit', ...options.split(' '), '-m', message], function(err){
             if(err){
                 reject(err);
             }
@@ -37,7 +37,7 @@ var commit = function(message, options){
 
 var getCurrentBranch = function(){
     return new Promise(function(resolve, reject){
-        exec('git rev-parse --abbrev-ref HEAD', function(err, result){
+        execFile('git', ['rev-parse', '--abbrev-ref', 'HEAD'], function(err, result){
             if(err){
                 reject(err);
             }
@@ -50,7 +50,7 @@ var getCurrentBranch = function(){
 
 var showFilesAdded = function(){
     return new Promise(function(resolve, reject){
-        exec('git status', function(err, result){
+        execFile('git', ['status'], function(err, result){
             if(err){
                 reject(err);
             }
@@ -70,7 +70,7 @@ var showFilesAdded = function(){
 
 var getFilesCached = function(){
     return new Promise(function(resolve, reject){
-        exec('git diff --name-only --cached', function(err, result){
+        execFile('git', ['diff', '--name-only', '--cached'], function(err, result){
             if (err){
                 reject(err);
             }
@@ -85,7 +85,7 @@ var getFilesCached = function(){
 
 var haveFilesToCommit = function(){
     return new Promise(function(resolve, reject){ 
-        exec('git status', function(err, result){
+        execFile('git', ['status'], function(err, result){
             if (err){
                 reject(err);
             }
@@ -105,7 +105,7 @@ var haveFilesToCommit = function(){
 
 var showFilesModified = function(){
     return new Promise(function(resolve, reject){
-        exec('git diff --name-only', function(err, result){
+        execFile('git', ['diff', '--name-only'], function(err, result){
             if(err){
                 reject(err);
             }
@@ -123,7 +123,7 @@ var revert = function(files){
     files = Array.isArray(files) ? files : [files];
     return new Promise(function(resolve, reject){
         async.each(files, function(file, next){
-            exec('git checkout -- ' + file, function(err){
+            execFile('git', ['checkout', '--', file], function(err){
                 if (err){
                     next(err);
                 }
@@ -191,7 +191,7 @@ var parseBranches = {
 var getBranches = {
     local: function(){ 
         return new Promise(function(resolve, reject){
-            exec('git show-ref', function(err, result){
+            execFile('git', ['show-ref'], function(err, result){
                 if(err){
                     reject(err);
                 }
@@ -204,7 +204,7 @@ var getBranches = {
     },
     all: function(){
         return new Promise(function(resolve, reject){
-            exec('git branch -a', function(err, result){
+            execFile('git', ['branch', '-a'], function(err, result){
                 if(err){
                     reject(err);
                 }
@@ -220,7 +220,7 @@ var getBranches = {
 
 var checkout = function(branch){
     return new Promise(function(resolve, reject){
-        exec('git checkout ' + branch, function(err, result){
+        execFile('git', ['checkout', branch], function(err, result){
             if(err){
                 reject(err);
             }
@@ -233,7 +233,7 @@ var checkout = function(branch){
 
 var newBranch = function(newBranchName){
     return new Promise(function(resolve, reject){
-        exec('git checkout -b ' + newBranchName, function(err){
+        execFile('git', ['checkout', '-b', newBranchName], function(err){
             if(err){
                 reject(err);
             }
@@ -246,7 +246,7 @@ var newBranch = function(newBranchName){
 
 var deleteBranch = function(branch){
     return new Promise(function(resolve, reject){
-        exec("git branch -d " + branch, function(err){
+        execFile('git', ['branch', '-d', branch], function(err){
             if (err){
                 reject(err);
             }
